@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'workshops/openrefine';</script>
     <link rel="canonical" href="/BSSDH2026-book/workshops/openrefine.html" />
-    <link rel="icon" href="../_static/openrefine_logo.svg"/>
+    <link rel="icon" href="../_static/openrefine-logo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Analysis and Visualization with Orange Data Mining" href="orange.html" />
@@ -151,8 +151,8 @@
       
     
     
-    <img src="../_static/openrefine_logo.svg" class="logo__image only-light" alt="BSSDH 2026 Workshop Materials - Home"/>
-    <img src="../_static/openrefine_logo.svg" class="logo__image only-dark pst-js-only" alt="BSSDH 2026 Workshop Materials - Home"/>
+    <img src="../_static/openrefine-logo.svg" class="logo__image only-light" alt="BSSDH 2026 Workshop Materials - Home"/>
+    <img src="../_static/openrefine-logo.svg" class="logo__image only-dark pst-js-only" alt="BSSDH 2026 Workshop Materials - Home"/>
   
   
 </a></div>
@@ -412,7 +412,7 @@
                   
   <section id="data-cleaning-with-openrefine">
 <h1>Data cleaning with OpenRefine<a class="headerlink" href="#data-cleaning-with-openrefine" title="Link to this heading">#</a></h1>
-<p>﻿<img alt="openrefine_logo.svg" src="../_images/openrefine_logo.svg" /></p>
+<p><img alt="screenshot" src="../_images/openrefine-logo.svg" /></p>
 <section id="increasing-memory-allocation">
 <h2>Increasing memory allocation<a class="headerlink" href="#increasing-memory-allocation" title="Link to this heading">#</a></h2>
 <p><a class="reference external" href="https://openrefine.org/docs/manual/installing#increasing-memory-allocation">https://openrefine.org/docs/manual/installing#increasing-memory-allocation</a></p>
@@ -426,11 +426,11 @@
 <h2>When would I use OpenRefine?<a class="headerlink" href="#when-would-i-use-openrefine" title="Link to this heading">#</a></h2>
 <p>OpenRefine is a smart tool that works best with a dataset organised in rows and columns. Most often this will be a CSV or Excel file. We use it to bring structure and order to the dataset. This is often necessary because, for the vast majority of datasets, there are inconsistencies in the data. These inconsistencies often come from data entry and from the fact that the dataset was originally in one or more other formats before it was brought together in rows and columns.</p>
 <p>For example, in a bibliographic dataset you may find inconsistencies like those in the image below. Even before we have looked closely at the dataset, we can say with reasonable confidence that the names are the same but have been entered differently.</p>
-<p>![Pasted image 20260706233552.png](../_static/images/Pasted image 20260706233552.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260706233552.png" /></p>
 <p>These are often small inconsistencies between different text strings, which in many contexts may be insignificant. But if the dataset is to be analysed systematically with a computer, you first need order and consistency. You choose whether to write Ildiko Gāšpāra, Ildikó Gáspár, or Ildiko Gaspar — but it must be exactly the same every time. OpenRefine can help here, because the program has good algorithms that can sort text strings into uniform groups, after which you can merge the different strings in a group into the new string you prefer.</p>
 <p>You may also have a dataset where some cells contain several different pieces of data. In these cases it is often ideal to spread the different pieces of data across several columns.
 The image below is an example of this. Some data repeats in every record. For example, a host_title, an ISSN number, and an issue — and it can be useful to create order by making three new columns, each with its own piece of data.</p>
-<p>![Pasted image 20260707003942.png](../_static/images/Pasted image 20260707003942.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707003942.png" /></p>
 <p>OpenRefine is a secure program. It runs locally on your computer and does not need the internet to work. When the program opens, it may look as if you are online, because it opens in a browser window. But if you look carefully at the address bar at the top of the browser — where you enter <code class="docutils literal notranslate"><span class="pre">https://...</span></code> or search — you will see <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:3333</span></code>. The address 127.0.0.1 means that OpenRefine is hosted by a local server on your computer, and 3333 is the port number the program runs on. You can see the local server in the console window that always opens at the same time as the browser window. The console window must stay open while you use the program; otherwise it will not work.</p>
 </section>
 <section id="how-do-i-get-data-into-the-program">
@@ -444,46 +444,46 @@ The image below is an example of this. Some data repeats in every record. For ex
 <section id="split-into-several-columns">
 <h2>Split into several columns<a class="headerlink" href="#split-into-several-columns" title="Link to this heading">#</a></h2>
 <p>Click the arrow to the left of author.</p>
-<p>![Pasted image 20260707110449.png](../_static/images/Pasted image 20260707110449.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707110449.png" /></p>
 <p>Choose Edit column -&gt; Split into several columns …</p>
-<p>![Pasted image 20260707110708.png](../_static/images/Pasted image 20260707110708.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707110708.png" /></p>
 <p>The separator is a comma, and from the first 10 columns we can see immediately, there is a comma in every cell in the column. I enter two in “Split into … columns at most” to keep track of the number of new columns.</p>
-<p>![Pasted image 20260707110610.png](../_static/images/Pasted image 20260707110610.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707110610.png" /></p>
 <p>We can inspect the result. It is not obvious, but in front of each name in “author 2” there is a space character left over from the split we just made.</p>
 </section>
 <section id="trim-leading-and-trailing-whitespace">
 <h2>Trim leading and trailing whitespace<a class="headerlink" href="#trim-leading-and-trailing-whitespace" title="Link to this heading">#</a></h2>
-<p>![Pasted image 20260707173503.png](../_static/images/Pasted image 20260707173503.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707173503.png" /></p>
 <p>We can handle the space with the “Trim leading and trailing whitespace” function. You find it under Edit cells -&gt; Common transforms -&gt; Trim leading and trailing whitespace.</p>
-<p>![Pasted image 20260707174208.png](../_static/images/Pasted image 20260707174208.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707174208.png" /></p>
 </section>
 <section id="rename-column">
 <h2>Rename column<a class="headerlink" href="#rename-column" title="Link to this heading">#</a></h2>
 <p>The new columns are named automatically, but we can change the name with the “Rename column” function. Edit column -&gt; Rename column …</p>
-<p>![Pasted image 20260707181555.png](../_static/images/Pasted image 20260707181555.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707181555.png" /></p>
 <p>Give the column a new name.
-![Pasted image 20260707181745.png](../_static/images/Pasted image 20260707181745.png)</p>
+<img alt="screenshot" src="../_images/pasted-image-20260707181745.png" /></p>
 </section>
 <section id="join-columns">
 <h2>Join columns<a class="headerlink" href="#join-columns" title="Link to this heading">#</a></h2>
 <p>Now we join the two author columns again.</p>
 <p>Edit columns-&gt; Join columns…</p>
-<p>![Pasted image 20260707210026.png](../_static/images/Pasted image 20260707210026.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707210026.png" /></p>
 <p>Choose the two columns you want to join. In “Separator between …” enter a comma followed by a space. Give the new column a name (author), check Delete joined columns, and click OK.</p>
-<p>![Pasted image 20260707210258.png](../_static/images/Pasted image 20260707210258.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260707210258.png" /></p>
 </section>
 <section id="task-split-host-info-into-three-columns">
 <h2>Task: Split host_info into three columns<a class="headerlink" href="#task-split-host-info-into-three-columns" title="Link to this heading">#</a></h2>
-<p>![Pasted image 20260708125259.png](../_static/images/Pasted image 20260708125259.png)</p>
-<p>![Pasted image 20260708125338.png](../_static/images/Pasted image 20260708125338.png)</p>
-<p>![Pasted image 20260708125431.png](../_static/images/Pasted image 20260708125431.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708125259.png" /></p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708125338.png" /></p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708125431.png" /></p>
 </section>
 <section id="transform-and-grel">
 <h2>Transform and GREL<a class="headerlink" href="#transform-and-grel" title="Link to this heading">#</a></h2>
 <p>The Transform function is under Edit cells -&gt; Transform.
-![Pasted image 20260708125541.png](../_static/images/Pasted image 20260708125541.png)</p>
+<img alt="screenshot" src="../_images/pasted-image-20260708125541.png" /></p>
 <p>A new window opens, and you can use GREL functions. For example, you can use <code class="docutils literal notranslate"><span class="pre">.replace()</span></code>, which lets you replace part of a text string with something else. This allows us to clean the field of ‘host_title: ‘.</p>
-<p>![Pasted image 20260708125752.png](../_static/images/Pasted image 20260708125752.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708125752.png" /></p>
 </section>
 <section id="task-clean-and-rename-host-name-13">
 <h2>Task: Clean and rename host_name 1–3<a class="headerlink" href="#task-clean-and-rename-host-name-13" title="Link to this heading">#</a></h2>
@@ -493,10 +493,10 @@ The image below is an example of this. Some data repeats in every record. For ex
 <h2>Transform and advanced GREL solutions<a class="headerlink" href="#transform-and-advanced-grel-solutions" title="Link to this heading">#</a></h2>
 <p>GREL (General Refine Expression Language) is a scripting language for working with text strings. It can be used to solve all kinds of problems, including ones that are complicated to write. This text does not go into depth on advanced solutions. GREL takes time to learn, because you can use RegEx (Regular Expressions) as a tool for text processing. Let us take a simple example.</p>
 <p>In the column ‘subject_person’ there are two commas. The first comma separates surname and given name, and we want to keep it. The second comma sits at the end of the string after the given name and is essentially just noise.</p>
-<p>![Pasted image 20260708145432.png](../_static/images/Pasted image 20260708145432.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708145432.png" /></p>
 <p>When we want to remove the final comma, we cannot use <code class="docutils literal notranslate"><span class="pre">value.replace(',',</span> <span class="pre">'')</span></code>, because that would delete both commas — including the first one we want to keep. The solution is RegEx, because we can target the comma at the end of the string.</p>
 <p>First, open Transform: Edit cells -&gt; Transform.</p>
-<p>![Pasted image 20260708150120.png](../_static/images/Pasted image 20260708150120.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708150120.png" /></p>
 <p><code class="docutils literal notranslate"><span class="pre">value</span></code> represents the current text string.</p>
 <p><code class="docutils literal notranslate"><span class="pre">.replace(...,</span> <span class="pre">'')</span></code> is the method for replacing part of the text string with an empty string.</p>
 <p><code class="docutils literal notranslate"><span class="pre">/,$/</span></code> is the RegEx pattern that matches the final comma (<code class="docutils literal notranslate"><span class="pre">$</span></code> = end of string)</p>
@@ -504,14 +504,14 @@ The image below is an example of this. Some data repeats in every record. For ex
 <section id="text-facets-and-clusters">
 <h2>Text facets and clusters<a class="headerlink" href="#text-facets-and-clusters" title="Link to this heading">#</a></h2>
 <p>You choose text facets under Facet -&gt; Text facet.</p>
-<p>![Pasted image 20260708095409.png](../_static/images/Pasted image 20260708095409.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708095409.png" /></p>
 <p>The facets appear in a new panel on the left side of the screen.
-![Pasted image 20260708113809.png](../_static/images/Pasted image 20260708113809.png)</p>
+<img alt="screenshot" src="../_images/pasted-image-20260708113809.png" /></p>
 <p>We can see that identical values are grouped. Ābele, Indra appears once, while Ābele, Inga appears eight times, and so on. The program suggests clicking the Cluster button.</p>
 <p>A new window opens. Click Cluster.</p>
-<p>![Pasted image 20260708123520.png](../_static/images/Pasted image 20260708123520.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708123520.png" /></p>
 <p>A new window opens, and you can now choose between different algorithms that sort similar-looking text strings. Click the Merge? field to the left of the strings if you want to make a correction. When you are done, click Merge selected &amp; re-cluster and try choosing a function.</p>
-<p>![Pasted image 20260708124029.png](../_static/images/Pasted image 20260708124029.png)</p>
+<p><img alt="screenshot" src="../_images/pasted-image-20260708124029.png" /></p>
 <p>This text does not explain the different algorithms in depth, but they are well documented in OpenRefine’s own documentation. Read more here: <a class="reference external" href="https://openrefine.org/docs/technical-reference/clustering-in-depth">https://openrefine.org/docs/technical-reference/clustering-in-depth</a></p>
 </section>
 <section id="task-clean-the-author-and-topic-columns-with-clustering">
