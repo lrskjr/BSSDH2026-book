@@ -25,3 +25,7 @@ Install Orange add-ons **Geo**, **Image Analytics**, and **Text** before the Ora
 ## Dataset
 
 The workshop uses a cleaned subset of bibliographic metadata. The main file is `metadata_bssdh.csv` (~57,900 records). Supporting files include UDC labels, geodata, and Latvian stopwords for text mining.
+
+## Acknowledgements
+
+These materials were prepared by Lars Kjær. [Cursor](https://cursor.com) was used as an AI-assisted editor for English translation, proofreading, and building this Jupyter Book site. All content was reviewed by the author.
