@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sequence plan — Workshop 1: Data cleaning with OpenRefine &#8212; BSSDH 2026 Workshop Materials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instructor/openrefine-sequence';</script>
+    <link rel="canonical" href="/BSSDH2026-book/instructor/openrefine-sequence.html" />
+    <link rel="icon" href="../_static/openrefine_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining" href="orange-sequence.html" />
+    <link rel="prev" title="Downloads" href="../downloads.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">BSSDH 2026 — OpenRefine and Orange workshop materials</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/openrefine_logo.svg" class="logo__image only-light" alt="BSSDH 2026 Workshop Materials - Home"/>
+    <img src="../_static/openrefine_logo.svg" class="logo__image only-dark pst-js-only" alt="BSSDH 2026 Workshop Materials - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../workshops/openrefine.html">Data cleaning with OpenRefine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshops/orange.html">Analysis and Visualization with Orange Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sequence plan — Workshop 1: Data cleaning with OpenRefine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="orange-sequence.html">Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book/edit/main/./instructor/openrefine-sequence.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book/issues/new?title=Issue%20on%20page%20%2Finstructor/openrefine-sequence.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/instructor/openrefine-sequence.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sequence plan — Workshop 1: Data cleaning with OpenRefine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-import-and-column-operations-9-3011-00">Part A: Import and column operations (9.30–11.00)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-openrefine-15-min">9.30–9.45 — Why OpenRefine? (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-program-runs-10-min">9.45–9.55 — How the program runs (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dataset-20-min">9.55–10.15 — Import dataset (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-split-trim-rename-join-20-min">10.15–10.35 — Demo: split, trim, rename, join (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-split-host-info-15-min">10.35–10.50 — Task: split <em>host_info</em> (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-part-a-10-min">10.50–11.00 — Wrap-up part A (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-11-0011-30">Break (11.00–11.30)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-transform-grel-clustering-and-export-11-3013-00">Part B: Transform, GREL, clustering and export (11.30–13.00)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-and-replace-15-min">11.30–11.45 — Transform and <code class="docutils literal notranslate"><span class="pre">.replace()</span></code> (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-clean-and-rename-host-name-13-20-min">11.45–12.05 — Task: clean and rename <em>host_name</em> 1–3 (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regex-remove-trailing-comma-15-min">12.05–12.20 — RegEx: remove trailing comma (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-facets-and-clustering-20-min">12.20–12.40 — Text facets and clustering (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-clean-author-and-topic-15-min">12.40–12.55 — Task: clean <em>author</em> and <em>topic</em> (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-and-closing-5-min">12.55–13.00 — Export and closing (5 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructor-notes">Instructor notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation-before-the-workshop">Preparation before the workshop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-problems">Typical problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-buffer">Timing buffer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes-after-the-workshop">Learning outcomes (after the workshop)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="sequence-plan-workshop-1-data-cleaning-with-openrefine">
+<h1>Sequence plan — Workshop 1: Data cleaning with OpenRefine<a class="headerlink" href="#sequence-plan-workshop-1-data-cleaning-with-openrefine" title="Link to this heading">#</a></h1>
+<p><em>BSSDH2026. Student material: <a class="reference internal" href="../workshops/openrefine.html"><span class="std std-doc">OpenRefine</span></a>. Duration: 9.30–13.00 (incl. break).</em></p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Time</p></th>
+<th class="head"><p>Activity</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>9.30–11.00</p></td>
+<td><p>Workshop 1, part A — import and column operations</p></td>
+</tr>
+<tr class="row-odd"><td><p>11.00–11.30</p></td>
+<td><p>Coffee break</p></td>
+</tr>
+<tr class="row-even"><td><p>11.30–13.00</p></td>
+<td><p>Workshop 1, part B — Transform/GREL, facets and clustering, export</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="part-a-import-and-column-operations-9-3011-00">
+<h2>Part A: Import and column operations (9.30–11.00)<a class="headerlink" href="#part-a-import-and-column-operations-9-3011-00" title="Link to this heading">#</a></h2>
+<section id="why-openrefine-15-min">
+<h3>9.30–9.45 — Why OpenRefine? (15 min)<a class="headerlink" href="#why-openrefine-15-min" title="Link to this heading">#</a></h3>
+<p><em>Short presentation. Reference: <a class="reference internal" href="../workshops/openrefine.html#when-would-i-use-openrefine"><span class="std std-ref">When would I use OpenRefine?</span></a></em></p>
+<ul class="simple">
+<li><p>What is a dataset in rows and columns (CSV/Excel)?</p></li>
+<li><p>Inconsistencies in bibliographic data (names entered differently)</p></li>
+<li><p>Cells with several pieces of data in one cell — need to split</p></li>
+<li><p>Workshop goal: cleaning before analysis in Orange, pandas, etc.</p></li>
+</ul>
+</section>
+<section id="how-the-program-runs-10-min">
+<h3>9.45–9.55 — How the program runs (10 min)<a class="headerlink" href="#how-the-program-runs-10-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#when-would-i-use-openrefine"><span class="std std-ref">When would I use OpenRefine?</span></a> (section on local server)</em></p>
+<ul class="simple">
+<li><p>Browser vs. local program: address bar <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:3333</span></code></p></li>
+<li><p>Console window must stay open</p></li>
+<li><p>Project ≠ original file (changes are saved in the project)</p></li>
+</ul>
+</section>
+<section id="import-dataset-20-min">
+<h3>9.55–10.15 — Import dataset (20 min)<a class="headerlink" href="#import-dataset-20-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#how-do-i-get-data-into-the-program"><span class="std std-ref">How do I get data into the program?</span></a></em></p>
+<ul class="simple">
+<li><p>Participants import the workshop file (choose files -&gt; next)</p></li>
+<li><p>Check <em>Trim leading &amp; trailing whitespace from strings</em></p></li>
+<li><p>Create project</p></li>
+<li><p>Brief tour of the interface: column arrows, the <em>All</em> column</p></li>
+</ul>
+</section>
+<section id="demo-split-trim-rename-join-20-min">
+<h3>10.15–10.35 — Demo: split, trim, rename, join (20 min)<a class="headerlink" href="#demo-split-trim-rename-join-20-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#split-into-several-columns"><span class="std std-ref">Split into several columns</span></a> through <a class="reference internal" href="../workshops/openrefine.html#join-columns"><span class="std std-ref">Join columns</span></a></em></p>
+<p>Joint demo on the <em>author</em> column:</p>
+<ol class="arabic simple">
+<li><p>Edit column -&gt; Split into several columns (separator: comma, max 2 columns)</p></li>
+<li><p>Edit cells -&gt; Trim leading and trailing whitespace</p></li>
+<li><p>Edit column -&gt; Rename column</p></li>
+<li><p>Edit columns -&gt; Join columns (separator: <code class="docutils literal notranslate"><span class="pre">,</span> </code>, delete joined columns)</p></li>
+</ol>
+<p>Participants follow step-by-step.</p>
+</section>
+<section id="task-split-host-info-15-min">
+<h3>10.35–10.50 — Task: split <em>host_info</em> (15 min)<a class="headerlink" href="#task-split-host-info-15-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#task-split-host_info-into-three-columns"><span class="std std-ref">Task: Split host_info into three columns</span></a></em></p>
+<ul class="simple">
+<li><p>Participants split <em>host_info</em> into three columns (individual task)</p></li>
+<li><p>Walk around and help with separator and number of columns</p></li>
+<li><p>Typical mistakes: too many/few columns, forgot to trim</p></li>
+</ul>
+</section>
+<section id="wrap-up-part-a-10-min">
+<h3>10.50–11.00 — Wrap-up part A (10 min)<a class="headerlink" href="#wrap-up-part-a-10-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>What did we learn? (split, trim, rename, join)</p></li>
+<li><p>The project is a copy — the original file is unchanged</p></li>
+<li><p>Preview of part B: Transform, GREL, clustering</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="break-11-0011-30">
+<h2>Break (11.00–11.30)<a class="headerlink" href="#break-11-0011-30" title="Link to this heading">#</a></h2>
+<p>Coffee break.</p>
+<p><em>Tip for instructor: check that console windows are still running; participants do not need to close OpenRefine.</em></p>
+</section>
+<hr class="docutils" />
+<section id="part-b-transform-grel-clustering-and-export-11-3013-00">
+<h2>Part B: Transform, GREL, clustering and export (11.30–13.00)<a class="headerlink" href="#part-b-transform-grel-clustering-and-export-11-3013-00" title="Link to this heading">#</a></h2>
+<section id="transform-and-replace-15-min">
+<h3>11.30–11.45 — Transform and <code class="docutils literal notranslate"><span class="pre">.replace()</span></code> (15 min)<a class="headerlink" href="#transform-and-replace-15-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#transform-and-grel"><span class="std std-ref">Transform and GREL</span></a></em></p>
+<ul class="simple">
+<li><p>Edit cells -&gt; Transform</p></li>
+<li><p>GREL: <code class="docutils literal notranslate"><span class="pre">value</span></code> and <code class="docutils literal notranslate"><span class="pre">.replace()</span></code></p></li>
+<li><p>Demo: remove the prefix *host_title: * in host columns</p></li>
+</ul>
+</section>
+<section id="task-clean-and-rename-host-name-13-20-min">
+<h3>11.45–12.05 — Task: clean and rename <em>host_name</em> 1–3 (20 min)<a class="headerlink" href="#task-clean-and-rename-host-name-13-20-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#task-clean-and-rename-host_name-1-3"><span class="std std-ref">Task: Clean and rename host_name 1–3</span></a></em></p>
+<ul class="simple">
+<li><p>Participants use Transform + Rename column</p></li>
+<li><p>Instructor circulates; group walkthrough of one solution if many are stuck</p></li>
+</ul>
+</section>
+<section id="regex-remove-trailing-comma-15-min">
+<h3>12.05–12.20 — RegEx: remove trailing comma (15 min)<a class="headerlink" href="#regex-remove-trailing-comma-15-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#transform-and-advanced-grel-solutions"><span class="std std-ref">Transform and advanced GREL solutions</span></a></em></p>
+<ul class="simple">
+<li><p>Problem in <em>subject_person</em>: two commas, only the last one should go</p></li>
+<li><p>Why <code class="docutils literal notranslate"><span class="pre">value.replace(',',</span> <span class="pre">'')</span></code> does not work</p></li>
+<li><p>Solution: <code class="docutils literal notranslate"><span class="pre">value.replace(/,$/,</span> <span class="pre">'')</span></code></p></li>
+<li><p>Brief explanation: <code class="docutils literal notranslate"><span class="pre">/,$/</span></code> and that <code class="docutils literal notranslate"><span class="pre">$</span></code> in regex means end of string</p></li>
+</ul>
+</section>
+<section id="text-facets-and-clustering-20-min">
+<h3>12.20–12.40 — Text facets and clustering (20 min)<a class="headerlink" href="#text-facets-and-clustering-20-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#text-facets-and-clusters"><span class="std std-ref">Text facets and clusters</span></a></em></p>
+<ul class="simple">
+<li><p>Facet -&gt; Text facet (demo on names/subjects)</p></li>
+<li><p>Cluster button: merge variants of the same value</p></li>
+<li><p>Short demo of Merge selected &amp; re-cluster</p></li>
+<li><p>Point to documentation if time allows: <a class="reference external" href="https://openrefine.org/docs/technical-reference/clustering-in-depth">https://openrefine.org/docs/technical-reference/clustering-in-depth</a></p></li>
+</ul>
+</section>
+<section id="task-clean-author-and-topic-15-min">
+<h3>12.40–12.55 — Task: clean <em>author</em> and <em>topic</em> (15 min)<a class="headerlink" href="#task-clean-author-and-topic-15-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#task-clean-the-author-and-topic-columns-with-clustering"><span class="std std-ref">Task: Clean the author and topic columns with clustering</span></a></em></p>
+<ul class="simple">
+<li><p>Participants cluster and merge in <em>author</em></p></li>
+<li><p>Then <em>topic</em> (or whatever column name the dataset uses)</p></li>
+<li><p>Instructor: help participants choose merge targets deliberately (not just the first suggestion)</p></li>
+</ul>
+</section>
+<section id="export-and-closing-5-min">
+<h3>12.55–13.00 — Export and closing (5 min)<a class="headerlink" href="#export-and-closing-5-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/openrefine.html#how-do-i-export-the-project-to-a-new-file"><span class="std std-ref">How do I export the project to a new file?</span></a></em></p>
+<ul class="simple">
+<li><p>Export -&gt; CSV -&gt; new filename (e.g. with suffix <em>_cleaned</em>)</p></li>
+<li><p>Short summary: what OpenRefine can and cannot do</p></li>
+<li><p>Resources: <a class="reference internal" href="../workshops/openrefine.html#resource"><span class="std std-ref">Resource</span></a></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="instructor-notes">
+<h2>Instructor notes<a class="headerlink" href="#instructor-notes" title="Link to this heading">#</a></h2>
+<section id="preparation-before-the-workshop">
+<h3>Preparation before the workshop<a class="headerlink" href="#preparation-before-the-workshop" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>[ ] OpenRefine installed and tested on teaching PCs</p></li>
+<li><p>[ ] Workshop CSV ready and shared (USB, link, or learning platform)</p></li>
+<li><p>[ ] Participants have read a short intro or received the file in advance</p></li>
+<li><p>[ ] <a class="reference internal" href="../workshops/openrefine.html"><span class="std std-doc">OpenRefine</span></a> available to participants</p></li>
+</ul>
+</section>
+<section id="typical-problems">
+<h3>Typical problems<a class="headerlink" href="#typical-problems" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Solution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Browser shows an error</p></td>
+<td><p>Check that the console window is running; restart OpenRefine</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wrong separator when splitting</p></td>
+<td><p>Undo (History); try again</p></td>
+</tr>
+<tr class="row-even"><td><p>Clustering merge too aggressive</p></td>
+<td><p>Undo; choose a different algorithm</p></td>
+</tr>
+<tr class="row-odd"><td><p>UTF-8/characters look wrong</p></td>
+<td><p>Check encoding on import</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="timing-buffer">
+<h3>Timing buffer<a class="headerlink" href="#timing-buffer" title="Link to this heading">#</a></h3>
+<p>If you are behind after part A: shorten the <em>host_info</em> task (guided group solution).</p>
+<p>If you are behind after part B: shorten the RegEx demo; prioritise the clustering task.</p>
+<p>If you are ahead: let participants export and open the cleaned CSV in Excel/Orange for comparison.</p>
+</section>
+<section id="learning-outcomes-after-the-workshop">
+<h3>Learning outcomes (after the workshop)<a class="headerlink" href="#learning-outcomes-after-the-workshop" title="Link to this heading">#</a></h3>
+<p>Participants can:</p>
+<ul class="simple">
+<li><p>import a CSV dataset and create an OpenRefine project</p></li>
+<li><p>split, trim, rename, and join columns</p></li>
+<li><p>use Transform with simple GREL and RegEx</p></li>
+<li><p>find and merge inconsistent values with clustering</p></li>
+<li><p>export a cleaned dataset for further analysis</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./instructor"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../downloads.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Downloads</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="orange-sequence.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-import-and-column-operations-9-3011-00">Part A: Import and column operations (9.30–11.00)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-openrefine-15-min">9.30–9.45 — Why OpenRefine? (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-the-program-runs-10-min">9.45–9.55 — How the program runs (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-dataset-20-min">9.55–10.15 — Import dataset (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-split-trim-rename-join-20-min">10.15–10.35 — Demo: split, trim, rename, join (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-split-host-info-15-min">10.35–10.50 — Task: split <em>host_info</em> (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-part-a-10-min">10.50–11.00 — Wrap-up part A (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break-11-0011-30">Break (11.00–11.30)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-transform-grel-clustering-and-export-11-3013-00">Part B: Transform, GREL, clustering and export (11.30–13.00)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-and-replace-15-min">11.30–11.45 — Transform and <code class="docutils literal notranslate"><span class="pre">.replace()</span></code> (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-clean-and-rename-host-name-13-20-min">11.45–12.05 — Task: clean and rename <em>host_name</em> 1–3 (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regex-remove-trailing-comma-15-min">12.05–12.20 — RegEx: remove trailing comma (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-facets-and-clustering-20-min">12.20–12.40 — Text facets and clustering (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-clean-author-and-topic-15-min">12.40–12.55 — Task: clean <em>author</em> and <em>topic</em> (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-and-closing-5-min">12.55–13.00 — Export and closing (5 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructor-notes">Instructor notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation-before-the-workshop">Preparation before the workshop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-problems">Typical problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-buffer">Timing buffer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes-after-the-workshop">Learning outcomes (after the workshop)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lars Kjær
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

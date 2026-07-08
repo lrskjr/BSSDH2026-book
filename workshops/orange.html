@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analysis and Visualization with Orange Data Mining &#8212; BSSDH 2026 Workshop Materials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'workshops/orange';</script>
+    <link rel="canonical" href="/BSSDH2026-book/workshops/orange.html" />
+    <link rel="icon" href="../_static/openrefine_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Downloads" href="../downloads.html" />
+    <link rel="prev" title="Data cleaning with OpenRefine" href="openrefine.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">BSSDH 2026 — OpenRefine and Orange workshop materials</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/openrefine_logo.svg" class="logo__image only-light" alt="BSSDH 2026 Workshop Materials - Home"/>
+    <img src="../_static/openrefine_logo.svg" class="logo__image only-dark pst-js-only" alt="BSSDH 2026 Workshop Materials - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="openrefine.html">Data cleaning with OpenRefine</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analysis and Visualization with Orange Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructor/openrefine-sequence.html">Sequence plan — Workshop 1: Data cleaning with OpenRefine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../instructor/orange-sequence.html">Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book/edit/main/./workshops/orange.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book/issues/new?title=Issue%20on%20page%20%2Fworkshops/orange.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/workshops/orange.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analysis and Visualization with Orange Data Mining</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-i-find-orange">Where do I find Orange?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-would-i-use-orange">When would I use Orange?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactivity">Interactivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-ons">Add-ons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-csv-files-and-build-a-workflow-to-analyse-the-landscape-of-language">Import CSV files and build a workflow to analyse the landscape of language</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-two-datasets-and-analyse-data-distribution">Merge two datasets and analyse data distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-rows-and-edit-domain-and-analyse-how-authors-write">Select Rows and Edit Domain and analyse how authors write</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geocoding-of-geographical-data-in-the-metadata">Geocoding of geographical data in the metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corpus-linguistic-methods-on-titles-and-sub-titles">Corpus linguistic methods on titles and sub titles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#and-now-to-something-different-image-classification">And now to something different — Image classification</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="analysis-and-visualization-with-orange-data-mining">
+<h1>Analysis and Visualization with Orange Data Mining<a class="headerlink" href="#analysis-and-visualization-with-orange-data-mining" title="Link to this heading">#</a></h1>
+<p>﻿![Uden titel 1.jpg](../_static/images/Uden titel 1.jpg)</p>
+<section id="where-do-i-find-orange">
+<h2>Where do I find Orange?<a class="headerlink" href="#where-do-i-find-orange" title="Link to this heading">#</a></h2>
+<p>Download Orange from <a class="reference external" href="https://orangedatamining.com/download/">https://orangedatamining.com/download/</a>. Different versions are available for Windows and Mac.</p>
+</section>
+<section id="when-would-i-use-orange">
+<h2>When would I use Orange?<a class="headerlink" href="#when-would-i-use-orange" title="Link to this heading">#</a></h2>
+<p>I use <a class="reference external" href="https://orangedatamining.com/">Orange</a> when I have well-ordered, structured datasets that I want to analyse and explore — for example through visualisations — and as a pedagogical tool when I want to learn about algorithms used in machine learning, AI, and text and data mining.</p>
+<p>The program is relatively easy to get started with because you do not need to code. Everything happens visually: you place widgets — small programs — on a canvas and connect them with channels that send data from one widget to the next in a workflow. Even though it is easy to get started, the data processing and calculations inside the widgets can be very complex if you want to understand them in depth. The advantage is that you can use the program to gain a broad overview of the steps that typically form part of computer-based data analysis.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
+<p>Orange is very <a class="reference external" href="https://orangedatamining.com/docs/">well documented</a> with text, images, and short tutorial videos on <a class="reference external" href="https://www.youtube.com/channel/UClKKWBe2SCAEyv7ZNGhIe4g">YouTube</a>, so the hurdle of learning a new program is genuinely manageable.</p>
+</section>
+<section id="interactivity">
+<h2>Interactivity<a class="headerlink" href="#interactivity" title="Link to this heading">#</a></h2>
+<p>A great feature is that Orange’s developers have built interactivity into the widgets, so you can select data in one widget and send the selection to another. For example, you can select rows in a Data Table widget and send them to a Bar Plot widget — as in the workflow image below.</p>
+<p>![Pasted image 20260708184522.png](../_static/images/Pasted image 20260708184522.png)</p>
+</section>
+<section id="add-ons">
+<h2>Add-ons<a class="headerlink" href="#add-ons" title="Link to this heading">#</a></h2>
+<p>Orange’s widgets are grouped into categories — for example Data, Transform, Visualize, and so on.</p>
+<p>![Pasted image 20260708190200.png](../_static/images/Pasted image 20260708190200.png)</p>
+<p>You add more widget groups by installing optional add-ons. That opens up further possibilities. Later in this text there are examples of workflows that use widgets beyond those installed by default.</p>
+<p>Install add-ons by clicking Options -&gt; Add-ons…</p>
+<p>![Pasted image 20260708190710.png](../_static/images/Pasted image 20260708190710.png)</p>
+<p>A new window opens. Select add-ons by checking the corresponding box. Check Geo, Image Analytics, and Text. Click OK and wait while the new add-ons install. Restart the program when prompted.</p>
+</section>
+<section id="import-csv-files-and-build-a-workflow-to-analyse-the-landscape-of-language">
+<h2>Import CSV files and build a workflow to analyse the landscape of language<a class="headerlink" href="#import-csv-files-and-build-a-workflow-to-analyse-the-landscape-of-language" title="Link to this heading">#</a></h2>
+<p>Let us learn more about Orange and data analysis — starting from the metadata dataset we worked with in OpenRefine.</p>
+<p>Use <a class="reference external" href="https://orangedatamining.com/widget-catalog/data/csvfileimport/">CSV File Import</a> to load the dataset. Then send data through <a class="reference external" href="https://orangedatamining.com/widget-catalog/transform/groupby/">Group by</a>, <a class="reference external" href="https://orangedatamining.com/widget-catalog/data/datatable/">Data Table</a>, and <a class="reference external" href="https://orangedatamining.com/widget-catalog/visualize/barplot/">Bar Plot</a> as in the workflow image. Spend some time getting the settings right in Group by.</p>
+<p>![1 language landscape.svg](../_static/images/1 language landscape.svg)</p>
+<p>Can you produce this Bar Plot showing the languages in which the publications were written?</p>
+<p>![Pasted image 20260708191601.png](../_static/images/Pasted image 20260708191601.png)</p>
+</section>
+<section id="merge-two-datasets-and-analyse-data-distribution">
+<h2>Merge two datasets and analyse data distribution<a class="headerlink" href="#merge-two-datasets-and-analyse-data-distribution" title="Link to this heading">#</a></h2>
+<p>![2 udc_labels.svg](../_static/images/2 udc_labels.svg)</p>
+<p>When you want to add extra data to your dataset, you can use <a class="reference external" href="https://orangedatamining.com/widget-catalog/transform/mergedata/">Merge Data</a>. This requires a column with values that both datasets share. In this case there is a column of unique control numbers that can be used to combine the two datasets into one. Try building the workflow shown in the image and work through the questions on the image as well. Besides <a class="reference external" href="https://orangedatamining.com/widget-catalog/transform/mergedata/">Merge Data</a>, you will use <a class="reference external" href="https://orangedatamining.com/widget-catalog/transform/groupby/">Group by</a>, <a class="reference external" href="https://orangedatamining.com/widget-catalog/data/featurestatistics/">Column Statistics</a>, <a class="reference external" href="https://orangedatamining.com/widget-catalog/visualize/distributions/">Distributions</a>, and <a class="reference external" href="https://orangedatamining.com/widget-catalog/visualize/boxplot/">Box Plot</a>.</p>
+</section>
+<section id="select-rows-and-edit-domain-and-analyse-how-authors-write">
+<h2>Select Rows and Edit Domain and analyse how authors write<a class="headerlink" href="#select-rows-and-edit-domain-and-analyse-how-authors-write" title="Link to this heading">#</a></h2>
+<p>The next workflow introduces two new widgets: <a class="reference external" href="https://orangedatamining.com/widget-catalog/transform/selectrows/">Select Rows</a> and <a class="reference external" href="https://orangedatamining.com/widget-catalog/data/editdomain/">Edit Domain</a>.</p>
+<p>Use Select Rows to filter the dataset. Try filtering so that only rows with the value <em>aut</em> are passed on — the values are in the <em>author role</em> column.</p>
+<p>In Edit Domain, reinterpret the data in the <em>author</em> column as categorical data. By default they are treated as strings, but to create the Bar Plot visualisation further along the workflow, <em>author</em> must be changed to categorical data. Categorical data is the opposite of numeric data. You cannot, for example, add two author names together, but you can count how often each name appears in relation to a publication.</p>
+<p>![3 authors 3.svg](../_static/images/3 authors 3.svg)</p>
+</section>
+<section id="geocoding-of-geographical-data-in-the-metadata">
+<h2>Geocoding of geographical data in the metadata<a class="headerlink" href="#geocoding-of-geographical-data-in-the-metadata" title="Link to this heading">#</a></h2>
+<p>The Geo add-on we installed offers good options for visualising geographical data from the bibliographic metadata. In the workflow below, <a class="reference external" href="https://orangedatamining.com/widget-catalog/geo/geocoding/">Geocoding</a>, <a class="reference external" href="https://orangedatamining.com/widget-catalog/geo/geomap/">Geo Map</a>, and <a class="reference external" href="https://orangedatamining.com/widget-catalog/geo/choroplethmap/">Choropleth Map</a> are used.</p>
+<p>![4 geodata.svg](../_static/images/4 geodata.svg)</p>
+<p>Can you produce a map like this?</p>
+<p>![Geodata from Metadata in Choropleth Map.svg](../_static/images/Geodata from Metadata in Choropleth Map.svg)</p>
+</section>
+<section id="corpus-linguistic-methods-on-titles-and-sub-titles">
+<h2>Corpus linguistic methods on titles and sub titles<a class="headerlink" href="#corpus-linguistic-methods-on-titles-and-sub-titles" title="Link to this heading">#</a></h2>
+<p>The following workflow is extensive. Start by merging metadata and UDC labels. In Select Rows, choose three things: 1. a UDC label of your choice. 2. the language code <em>lav</em>. 3. rows where the author field is not empty. Then send data to Corpus, where you choose to use <em>titles</em> and <em>sub_titles</em>. Once data has passed through the Corpus widget, you can use all the text mining widgets.</p>
+<p>![5 corpus linguistic tools on latvian titles.svg](../_static/images/5 corpus linguistic tools on latvian titles.svg)</p>
+</section>
+<section id="and-now-to-something-different-image-classification">
+<h2>And now to something different — Image classification<a class="headerlink" href="#and-now-to-something-different-image-classification" title="Link to this heading">#</a></h2>
+<p>One last thing worth mentioning is <a class="reference external" href="https://orangedatamining.com/widget-catalog/image-analytics/importimages/">Image Analytics widgets</a>, which can group images that share visual features. For this I use a small new dataset of pages from historical department store catalogues. The images are in the folder <em>daells warehouse categories</em>. Import the folder with Import Images and send it through a workflow like the one below. In Hierarchical Clustering the images are grouped, and when you click a group, the images in that group are sent on to Image Viewer.</p>
+<p>![6 Images classification.svg](../_static/images/6 Images classification.svg)</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./workshops"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="openrefine.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Data cleaning with OpenRefine</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../downloads.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Downloads</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-i-find-orange">Where do I find Orange?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-would-i-use-orange">When would I use Orange?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interactivity">Interactivity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-ons">Add-ons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-csv-files-and-build-a-workflow-to-analyse-the-landscape-of-language">Import CSV files and build a workflow to analyse the landscape of language</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-two-datasets-and-analyse-data-distribution">Merge two datasets and analyse data distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#select-rows-and-edit-domain-and-analyse-how-authors-write">Select Rows and Edit Domain and analyse how authors write</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geocoding-of-geographical-data-in-the-metadata">Geocoding of geographical data in the metadata</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corpus-linguistic-methods-on-titles-and-sub-titles">Corpus linguistic methods on titles and sub titles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#and-now-to-something-different-image-classification">And now to something different — Image classification</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lars Kjær
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

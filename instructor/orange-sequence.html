@@ -1,0 +1,943 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining &#8212; BSSDH 2026 Workshop Materials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instructor/orange-sequence';</script>
+    <link rel="canonical" href="/BSSDH2026-book/instructor/orange-sequence.html" />
+    <link rel="icon" href="../_static/openrefine_logo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Sequence plan — Workshop 1: Data cleaning with OpenRefine" href="openrefine-sequence.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">BSSDH 2026 — OpenRefine and Orange workshop materials</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/openrefine_logo.svg" class="logo__image only-light" alt="BSSDH 2026 Workshop Materials - Home"/>
+    <img src="../_static/openrefine_logo.svg" class="logo__image only-dark pst-js-only" alt="BSSDH 2026 Workshop Materials - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../workshops/openrefine.html">Data cleaning with OpenRefine</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshops/orange.html">Analysis and Visualization with Orange Data Mining</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="openrefine-sequence.html">Sequence plan — Workshop 1: Data cleaning with OpenRefine</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book/edit/main/./instructor/orange-sequence.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/lrskjr/BSSDH2026-book/issues/new?title=Issue%20on%20page%20%2Finstructor/orange-sequence.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/instructor/orange-sequence.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-4-august-14-0015-30">Part A — 4 August, 14.00–15.30</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-orange-and-add-ons-15-min">14.00–14.15 — Intro: Orange and add-ons (15 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-orange-10-min">Why Orange? (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-add-ons-5-min">Install add-ons (5 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-1-language-landscape-20-min">14.15–14.35 — Workflow 1: Language landscape (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-10-min">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-10-min">Task (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-2-merge-and-data-distribution-20-min">14.35–14.55 — Workflow 2: Merge and data distribution (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-8-min">Demo (8 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-12-min">Task (12 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-3-authors-35-min">14.55–15.30 — Workflow 3: Authors (35 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-20-min">Task (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-part-a-5-min">Wrap-up part A (5 min)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-5-august-9-3011-00">Part B — 5 August, 9.30–11.00</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-10-min">9.30–9.40 — Recap (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geodata-20-min">9.40–10.00 — Geodata (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Task (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corpus-and-text-mining-35-min">10.00–10.35 — Corpus and text mining (35 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-15-min">Demo (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Task (20 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-classification-20-min">10.35–10.55 — Image classification (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Task (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-5-min">10.55–11.00 — Closing (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructor-notes">Instructor notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-problems">Typical problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-buffer">Timing buffer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes-after-both-parts">Learning outcomes (after both parts)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="sequence-plan-workshop-2-analysis-and-visualization-with-orange-data-mining">
+<h1>Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining<a class="headerlink" href="#sequence-plan-workshop-2-analysis-and-visualization-with-orange-data-mining" title="Link to this heading">#</a></h1>
+<p><em>BSSDH2026. Student material: <a class="reference internal" href="../workshops/orange.html"><span class="std std-doc">Orange</span></a>. Duration: 2 × 90 min (no break).</em></p>
+<hr class="docutils" />
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Day</p></th>
+<th class="head"><p>Time</p></th>
+<th class="head"><p>Focus</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Part A</strong> — 4 August (Tuesday)</p></td>
+<td><p>14.00–15.30</p></td>
+<td><p>Intro, add-ons, and three workflows with bibliographic metadata</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Part B</strong> — 5 August (Wednesday)</p></td>
+<td><p>9.30–11.00</p></td>
+<td><p>Geodata, corpus/text mining, image classification, and closing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-a-4-august-14-0015-30">
+<h1>Part A — 4 August, 14.00–15.30<a class="headerlink" href="#part-a-4-august-14-0015-30" title="Link to this heading">#</a></h1>
+<p><em>Bibliographic metadata: import, merge, filtering, and visualisation.</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Time</p></th>
+<th class="head"><p>Activity</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>14.00–14.15</p></td>
+<td><p>Intro — Orange, widgets, add-ons</p></td>
+</tr>
+<tr class="row-odd"><td><p>14.15–14.35</p></td>
+<td><p>Workflow 1 — language landscape</p></td>
+</tr>
+<tr class="row-even"><td><p>14.35–14.55</p></td>
+<td><p>Workflow 2 — merge and UDC distribution</p></td>
+</tr>
+<tr class="row-odd"><td><p>14.55–15.30</p></td>
+<td><p>Workflow 3 — Select Rows, Edit Domain, authors</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="intro-orange-and-add-ons-15-min">
+<h2>14.00–14.15 — Intro: Orange and add-ons (15 min)<a class="headerlink" href="#intro-orange-and-add-ons-15-min" title="Link to this heading">#</a></h2>
+<section id="why-orange-10-min">
+<h3>Why Orange? (10 min)<a class="headerlink" href="#why-orange-10-min" title="Link to this heading">#</a></h3>
+<p><em>Short presentation. Reference: <a class="reference internal" href="../workshops/orange.html#when-would-i-use-orange"><span class="std std-ref">When would I use Orange?</span></a> and <a class="reference internal" href="../workshops/orange.html#documentation"><span class="std std-ref">Documentation</span></a></em></p>
+<ul class="simple">
+<li><p>Orange after OpenRefine: cleaned dataset ready for analysis and visualisation</p></li>
+<li><p>Widgets, channels, and workflows — no coding required</p></li>
+<li><p>Interactivity: select data in one widget and send it on (demo from <a class="reference internal" href="../workshops/orange.html#interactivity"><span class="std std-ref">Interactivity</span></a>)</p></li>
+<li><p>Point to documentation and the YouTube channel</p></li>
+</ul>
+</section>
+<section id="install-add-ons-5-min">
+<h3>Install add-ons (5 min)<a class="headerlink" href="#install-add-ons-5-min" title="Link to this heading">#</a></h3>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#add-ons"><span class="std std-ref">Add-ons</span></a></em></p>
+<ul class="simple">
+<li><p>Options -&gt; Add-ons -&gt; check Geo, Image Analytics, and Text</p></li>
+<li><p>Wait for installation; restart Orange</p></li>
+<li><p>Brief tour of widget groups (Data, Transform, Visualize)</p></li>
+<li><p><em>Geo, Text, and Image Analytics are used in part B tomorrow</em></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-1-language-landscape-20-min">
+<h2>14.15–14.35 — Workflow 1: Language landscape (20 min)<a class="headerlink" href="#workflow-1-language-landscape-20-min" title="Link to this heading">#</a></h2>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#import-csv-files-and-build-a-workflow-to-analyse-the-landscape-of-language"><span class="std std-ref">Import CSV files and build a workflow to analyse the landscape of language</span></a></em></p>
+<section id="demo-10-min">
+<h3>Demo (10 min)<a class="headerlink" href="#demo-10-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>CSV File Import: load cleaned metadata from the OpenRefine workshop</p></li>
+<li><p>Group by: count records by language (set aggregation correctly)</p></li>
+<li><p>Data Table + Bar Plot: show language distribution</p></li>
+<li><p>Show the workflow image: ![1 language landscape.svg](../_static/images/1 language landscape.svg)</p></li>
+</ul>
+</section>
+<section id="task-10-min">
+<h3>Task (10 min)<a class="headerlink" href="#task-10-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Participants build the workflow step-by-step</p></li>
+<li><p>Goal: Bar Plot matching the reference image ![Pasted image 20260708191601.png](../_static/images/Pasted image 20260708191601.png)</p></li>
+<li><p>Instructor circulates; typical mistakes: wrong column in Group by</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-2-merge-and-data-distribution-20-min">
+<h2>14.35–14.55 — Workflow 2: Merge and data distribution (20 min)<a class="headerlink" href="#workflow-2-merge-and-data-distribution-20-min" title="Link to this heading">#</a></h2>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#merge-two-datasets-and-analyse-data-distribution"><span class="std std-ref">Merge two datasets and analyse data distribution</span></a></em></p>
+<section id="demo-8-min">
+<h3>Demo (8 min)<a class="headerlink" href="#demo-8-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Merge Data: join metadata with UDC labels via a shared control-number column</p></li>
+<li><p>Show workflow: ![2 udc_labels.svg](../_static/images/2 udc_labels.svg)</p></li>
+<li><p>Brief intro to Column Statistics, Distributions, and Box Plot</p></li>
+</ul>
+</section>
+<section id="task-12-min">
+<h3>Task (12 min)<a class="headerlink" href="#task-12-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Participants build the merge workflow</p></li>
+<li><p>Answer the questions on the workflow image (distribution, outliers, comparison)</p></li>
+<li><p>Instructor: check that the merge key matches in both files</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow-3-authors-35-min">
+<h2>14.55–15.30 — Workflow 3: Authors (35 min)<a class="headerlink" href="#workflow-3-authors-35-min" title="Link to this heading">#</a></h2>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#select-rows-and-edit-domain-and-analyse-how-authors-write"><span class="std std-ref">Select Rows and Edit Domain and analyse how authors write</span></a></em></p>
+<section id="id1">
+<h3>Demo (10 min)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Select Rows: filter <em>author role</em> = <em>aut</em></p></li>
+<li><p>Edit Domain: set <em>author</em> to categorical (not string)</p></li>
+<li><p>Explain nominal categorical data — count, do not compute with names</p></li>
+<li><p>Show workflow: ![3 authors 3.svg](../_static/images/3 authors 3.svg)</p></li>
+</ul>
+</section>
+<section id="task-20-min">
+<h3>Task (20 min)<a class="headerlink" href="#task-20-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Participants filter and change domain</p></li>
+<li><p>Bar Plot or similar visualisation of author frequency</p></li>
+<li><p>Instructor circulates; typical mistake: Bar Plot fails because <em>author</em> is still a string</p></li>
+</ul>
+</section>
+<section id="wrap-up-part-a-5-min">
+<h3>Wrap-up part A (5 min)<a class="headerlink" href="#wrap-up-part-a-5-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>What did we learn? (import, merge, filtering, Edit Domain)</p></li>
+<li><p>Save workflows (.ows) — you continue tomorrow with geodata, corpus, and images</p></li>
+<li><p>Preview of part B: Geo, Text, and Image Analytics add-ons</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-b-5-august-9-3011-00">
+<h1>Part B — 5 August, 9.30–11.00<a class="headerlink" href="#part-b-5-august-9-3011-00" title="Link to this heading">#</a></h1>
+<p><em>Geographical data, corpus linguistics, and image analysis.</em></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Time</p></th>
+<th class="head"><p>Activity</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>9.30–9.40</p></td>
+<td><p>Brief recap and reopen workflows from yesterday</p></td>
+</tr>
+<tr class="row-odd"><td><p>9.40–10.00</p></td>
+<td><p>Geodata — Geocoding and Choropleth Map</p></td>
+</tr>
+<tr class="row-even"><td><p>10.00–10.35</p></td>
+<td><p>Corpus and text mining on titles</p></td>
+</tr>
+<tr class="row-odd"><td><p>10.35–10.55</p></td>
+<td><p>Image classification</p></td>
+</tr>
+<tr class="row-even"><td><p>10.55–11.00</p></td>
+<td><p>Closing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="recap-10-min">
+<h2>9.30–9.40 — Recap (10 min)<a class="headerlink" href="#recap-10-min" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Reopen saved workflows from Tuesday</p></li>
+<li><p>Brief repetition: widgets, channels, Edit Domain</p></li>
+<li><p>Check that Geo, Text, and Image Analytics add-ons are still installed</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="geodata-20-min">
+<h2>9.40–10.00 — Geodata (20 min)<a class="headerlink" href="#geodata-20-min" title="Link to this heading">#</a></h2>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#geocoding-of-geographical-data-in-the-metadata"><span class="std std-ref">Geocoding of geographical data in the metadata</span></a></em></p>
+<section id="id2">
+<h3>Demo (10 min)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Geocoding -&gt; Geo Map / Choropleth Map</p></li>
+<li><p>Show workflow: ![4 geodata.svg](../_static/images/4 geodata.svg)</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Task (10 min)<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Participants build the geodata workflow</p></li>
+<li><p>Goal: map like ![Geodata from Metadata in Choropleth Map.svg](../_static/images/Geodata from Metadata in Choropleth Map.svg)</p></li>
+<li><p>Instructor: help with choice of geographic column and map type</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="corpus-and-text-mining-35-min">
+<h2>10.00–10.35 — Corpus and text mining (35 min)<a class="headerlink" href="#corpus-and-text-mining-35-min" title="Link to this heading">#</a></h2>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#corpus-linguistic-methods-on-titles-and-sub-titles"><span class="std std-ref">Corpus linguistic methods on titles and sub titles</span></a></em></p>
+<section id="demo-15-min">
+<h3>Demo (15 min)<a class="headerlink" href="#demo-15-min" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Merge metadata + UDC labels (reuse from part A)</p></li>
+<li><p>Select Rows: choose a UDC label, language code <em>lav</em>, author not empty</p></li>
+<li><p>Corpus widget: choose <em>titles</em> and <em>sub_titles</em></p></li>
+<li><p>Show workflow: ![5 corpus linguistic tools on latvian titles.svg](../_static/images/5 corpus linguistic tools on latvian titles.svg)</p></li>
+<li><p>Brief intro to text mining widgets (Word Cloud, Bag of Words, etc.)</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Task (20 min)<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Participants build the corpus workflow with their own choice of UDC label</p></li>
+<li><p>Experiment with at least one text mining widget</p></li>
+<li><p>Instructor circulates; this is the most extensive workflow</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="image-classification-20-min">
+<h2>10.35–10.55 — Image classification (20 min)<a class="headerlink" href="#image-classification-20-min" title="Link to this heading">#</a></h2>
+<p><em>Reference: <a class="reference internal" href="../workshops/orange.html#and-now-to-something-different-image-classification"><span class="std std-ref">And now to something different - Image classification</span></a></em></p>
+<section id="id5">
+<h3>Demo (10 min)<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Import Images: folder <em>daells warehouse categories</em></p></li>
+<li><p>Hierarchical Clustering -&gt; Image Viewer</p></li>
+<li><p>Show workflow: ![6 Images classification.svg](../_static/images/6 Images classification.svg)</p></li>
+<li><p>Explain: a different dataset from metadata — same Orange principles</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Task (10 min)<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Participants import the image folder and run clustering</p></li>
+<li><p>Click a group and send selected images to Image Viewer</p></li>
+<li><p>Brief comparison: metadata vs. images as data types</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="closing-5-min">
+<h2>10.55–11.00 — Closing (5 min)<a class="headerlink" href="#closing-5-min" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Orange can visualise, filter, merge, and mine text — it does not replace OpenRefine for cleaning</p></li>
+<li><p>Resources: <a class="reference internal" href="../workshops/orange.html#documentation"><span class="std std-ref">Documentation</span></a></p></li>
+<li><p>Export all workflows (.ows)</p></li>
+<li><p>Point to self-study / hackathon for further exploration</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="instructor-notes">
+<h2>Instructor notes<a class="headerlink" href="#instructor-notes" title="Link to this heading">#</a></h2>
+<section id="preparation">
+<h3>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>[ ] Orange installed with Geo, Image Analytics, and Text add-ons <em>(preferably before part A)</em></p></li>
+<li><p>[ ] Cleaned CSV from the OpenRefine workshop ready for part A</p></li>
+<li><p>[ ] UDC label file ready for Merge Data</p></li>
+<li><p>[ ] <em>daells warehouse categories</em> folder ready for part B</p></li>
+<li><p>[ ] Workflow images (.svg) and <a class="reference internal" href="../workshops/orange.html"><span class="std std-doc">Orange</span></a> available to participants</p></li>
+</ul>
+</section>
+<section id="typical-problems">
+<h3>Typical problems<a class="headerlink" href="#typical-problems" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Solution</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bar Plot shows nothing / error</p></td>
+<td><p>Check Edit Domain — column must be categorical</p></td>
+</tr>
+<tr class="row-odd"><td><p>Merge yields empty table</p></td>
+<td><p>Check that key column has the same name and data type in both files</p></td>
+</tr>
+<tr class="row-even"><td><p>Add-ons missing</p></td>
+<td><p>Reinstall via Options -&gt; Add-ons; restart Orange</p></td>
+</tr>
+<tr class="row-odd"><td><p>Geocoding fails</p></td>
+<td><p>Check column format; try a different geocoding method in the widget</p></td>
+</tr>
+<tr class="row-even"><td><p>Corpus empty after Select Rows</p></td>
+<td><p>Check filter combination (UDC + <em>lav</em> + author)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="timing-buffer">
+<h3>Timing buffer<a class="headerlink" href="#timing-buffer" title="Link to this heading">#</a></h3>
+<p><strong>Part A:</strong> If you are behind after workflow 2, shorten the UDC task (guided group walkthrough).</p>
+<p><strong>Part B:</strong> If corpus takes too long, shorten the image task to demo-only. If you are ahead, let participants explore more text mining widgets.</p>
+</section>
+<section id="learning-outcomes-after-both-parts">
+<h3>Learning outcomes (after both parts)<a class="headerlink" href="#learning-outcomes-after-both-parts" title="Link to this heading">#</a></h3>
+<p>Participants can:</p>
+<ul class="simple">
+<li><p>load a CSV dataset and build Orange workflows with widgets and channels</p></li>
+<li><p>group, merge, and visualise bibliographic metadata</p></li>
+<li><p>filter rows and change column type (Edit Domain)</p></li>
+<li><p>visualise geographical data with the Geo add-on</p></li>
+<li><p>build a simple corpus and use text mining widgets</p></li>
+<li><p>group images with Hierarchical Clustering</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./instructor"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="openrefine-sequence.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sequence plan — Workshop 1: Data cleaning with OpenRefine</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-a-4-august-14-0015-30">Part A — 4 August, 14.00–15.30</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-orange-and-add-ons-15-min">14.00–14.15 — Intro: Orange and add-ons (15 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-orange-10-min">Why Orange? (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-add-ons-5-min">Install add-ons (5 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-1-language-landscape-20-min">14.15–14.35 — Workflow 1: Language landscape (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-10-min">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-10-min">Task (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-2-merge-and-data-distribution-20-min">14.35–14.55 — Workflow 2: Merge and data distribution (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-8-min">Demo (8 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-12-min">Task (12 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-3-authors-35-min">14.55–15.30 — Workflow 3: Authors (35 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-20-min">Task (20 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up-part-a-5-min">Wrap-up part A (5 min)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-b-5-august-9-3011-00">Part B — 5 August, 9.30–11.00</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-10-min">9.30–9.40 — Recap (10 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geodata-20-min">9.40–10.00 — Geodata (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Task (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#corpus-and-text-mining-35-min">10.00–10.35 — Corpus and text mining (35 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demo-15-min">Demo (15 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Task (20 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-classification-20-min">10.35–10.55 — Image classification (20 min)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Demo (10 min)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Task (10 min)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-5-min">10.55–11.00 — Closing (5 min)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructor-notes">Instructor notes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preparation">Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-problems">Typical problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-buffer">Timing buffer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes-after-both-parts">Learning outcomes (after both parts)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lars Kjær
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
