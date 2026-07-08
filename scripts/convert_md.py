@@ -173,8 +173,10 @@ def copy_data_files() -> None:
         shutil.copy2(f, orange_dst / safe_name)
 
 
-def dl_link(path: str, label: str) -> str:
+def dl_link(path: str, label: str, download: bool = False) -> str:
     '''HTML link — avoids MyST mis-parsing markdown paths as xrefs.'''
+    if download:
+        return f'<a href="{path}" download="{label}">{label}</a>'
     return f'<a href="{path}">{label}</a>'
 
 
@@ -211,10 +213,10 @@ def write_downloads() -> None:
         '',
         '| File | Description |',
         '|------|-------------|',
-        f'| {dl_link("_static/files/data/metadata_bssdh.csv", "metadata_bssdh.csv")} | Main workshop dataset (cleaned bibliographic metadata) |',
-        f'| {dl_link("_static/files/data/record_id_udc_number_udc_label_en.csv", "record_id_udc_number_udc_label_en.csv")} | UDC numbers with English labels (for Merge Data in Orange) |',
-        f'| {dl_link("_static/files/data/geodata.csv", "geodata.csv")} | Geographical data for geocoding workflows |',
-        f'| {dl_link("_static/files/data/stopwords-lv.txt", "stopwords-lv.txt")} | Latvian stopwords for text mining |',
+        f'| {dl_link("_static/files/data/metadata_bssdh.csv", "metadata_bssdh.csv", download=True)} | Main workshop dataset (cleaned bibliographic metadata) |',
+        f'| {dl_link("_static/files/data/record_id_udc_number_udc_label_en.csv", "record_id_udc_number_udc_label_en.csv", download=True)} | UDC numbers with English labels (for Merge Data in Orange) |',
+        f'| {dl_link("_static/files/data/geodata.csv", "geodata.csv", download=True)} | Geographical data for geocoding workflows |',
+        f'| {dl_link("_static/files/data/stopwords-lv.txt", "stopwords-lv.txt", download=True)} | Latvian stopwords for text mining |',
         f'| {dl_link("_static/files/data/geomap.html", "geomap.html")} | Exported geo map (reference) |',
         '',
         '## Orange workflows (.ows)',
@@ -236,7 +238,7 @@ def write_downloads() -> None:
     for label, original in ows_rows:
         safe = OWS_MAP.get(original, slugify_filename(original))
         lines.append(
-            f'| {label} | {dl_link(f"_static/files/orange/{safe}", safe)} |'
+            f'| {label} | {dl_link(f"_static/files/orange/{safe}", safe, download=True)} |'
         )
 
     lines.extend([
