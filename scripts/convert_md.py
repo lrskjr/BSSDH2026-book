@@ -40,6 +40,7 @@ SECTION_SLUGS = {
 
 # original filename -> URL-safe filename (filled by copy_assets)
 IMAGE_MAP: dict[str, str] = {}
+OWS_MAP: dict[str, str] = {}
 
 
 def slugify_filename(name: str) -> str:
@@ -150,6 +151,7 @@ def copy_assets() -> None:
 def copy_data_files() -> None:
     data_dst = BOOK / '_static' / 'files' / 'data'
     orange_dst = BOOK / '_static' / 'files' / 'orange'
+    OWS_MAP.clear()
 
     data_files = [
         'metadata_bssdh.csv',
@@ -161,8 +163,19 @@ def copy_data_files() -> None:
     for name in data_files:
         shutil.copy2(DATA / name, data_dst / name)
 
+    for old in orange_dst.iterdir():
+        if old.is_file():
+            old.unlink()
+
     for f in DATA.glob('*.ows'):
-        shutil.copy2(f, orange_dst / f.name)
+        safe_name = slugify_filename(f.name)
+        OWS_MAP[f.name] = safe_name
+        shutil.copy2(f, orange_dst / safe_name)
+
+
+def dl_link(path: str, label: str) -> str:
+    '''HTML link — avoids MyST mis-parsing markdown paths as xrefs.'''
+    return f'<a href="{path}">{label}</a>'
 
 
 def strip_openrefine_logo(text: str) -> str:
@@ -198,11 +211,11 @@ def write_downloads() -> None:
         '',
         '| File | Description |',
         '|------|-------------|',
-        '| [metadata_bssdh.csv](../_static/files/data/metadata_bssdh.csv) | Main workshop dataset (cleaned bibliographic metadata) |',
-        '| [record_id_udc_number_udc_label_en.csv](../_static/files/data/record_id_udc_number_udc_label_en.csv) | UDC numbers with English labels (for Merge Data in Orange) |',
-        '| [geodata.csv](../_static/files/data/geodata.csv) | Geographical data for geocoding workflows |',
-        '| [stopwords-lv.txt](../_static/files/data/stopwords-lv.txt) | Latvian stopwords for text mining |',
-        '| [geomap.html](../_static/files/data/geomap.html) | Exported geo map (reference) |',
+        f'| {dl_link("_static/files/data/metadata_bssdh.csv", "metadata_bssdh.csv")} | Main workshop dataset (cleaned bibliographic metadata) |',
+        f'| {dl_link("_static/files/data/record_id_udc_number_udc_label_en.csv", "record_id_udc_number_udc_label_en.csv")} | UDC numbers with English labels (for Merge Data in Orange) |',
+        f'| {dl_link("_static/files/data/geodata.csv", "geodata.csv")} | Geographical data for geocoding workflows |',
+        f'| {dl_link("_static/files/data/stopwords-lv.txt", "stopwords-lv.txt")} | Latvian stopwords for text mining |',
+        f'| {dl_link("_static/files/data/geomap.html", "geomap.html")} | Exported geo map (reference) |',
         '',
         '## Orange workflows (.ows)',
         '',
@@ -210,18 +223,29 @@ def write_downloads() -> None:
         '',
         '| Workflow | File |',
         '|----------|------|',
-        '| 1 — Language landscape | [1 language landscape.ows](../_static/files/orange/1%20language%20landscape.ows) |',
-        '| 2 — UDC labels | [2 udc_labels.ows](../_static/files/orange/2%20udc_labels.ows) |',
-        '| 3 — Authors | [3 authors.ows](../_static/files/orange/3%20authors.ows) |',
-        '| 4 — Geodata | [4 geodata.ows](../_static/files/orange/4%20geodata.ows) |',
-        '| 5 — Corpus (Latvian titles) | [5 corpus linguistic tools on latvian titles.ows](../_static/files/orange/5%20corpus%20linguistic%20tools%20on%20latvian%20titles.ows) |',
-        '| 6 — Image classification | [6 Images classification.ows](../_static/files/orange/6%20Images%20classification.ows) |',
+    ]
+
+    ows_rows = [
+        ('1 — Language landscape', '1 language landscape.ows'),
+        ('2 — UDC labels', '2 udc_labels.ows'),
+        ('3 — Authors', '3 authors.ows'),
+        ('4 — Geodata', '4 geodata.ows'),
+        ('5 — Corpus (Latvian titles)', '5 corpus linguistic tools on latvian titles.ows'),
+        ('6 — Image classification', '6 Images classification.ows'),
+    ]
+    for label, original in ows_rows:
+        safe = OWS_MAP.get(original, slugify_filename(original))
+        lines.append(
+            f'| {label} | {dl_link(f"_static/files/orange/{safe}", safe)} |'
+        )
+
+    lines.extend([
         '',
         '## Workflow diagrams (.svg)',
         '',
         'These images are also embedded in the [Orange workshop guide](workshops/orange.md).',
         '',
-    ]
+    ])
 
     svg_keys = [
         '1 language landscape.svg',
@@ -233,7 +257,7 @@ def write_downloads() -> None:
     ]
     for key in svg_keys:
         safe = IMAGE_MAP.get(key, slugify_filename(key))
-        lines.append(f'- [{key}](../_static/images/{safe})')
+        lines.append(f'- {dl_link(f"_static/images/{safe}", key)}')
 
     (BOOK / 'downloads.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
 

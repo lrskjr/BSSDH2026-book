@@ -6,11 +6,11 @@ All workshop files are available for direct download below.
 
 | File | Description |
 |------|-------------|
-| [metadata_bssdh.csv](../_static/files/data/metadata_bssdh.csv) | Main workshop dataset (cleaned bibliographic metadata) |
-| [record_id_udc_number_udc_label_en.csv](../_static/files/data/record_id_udc_number_udc_label_en.csv) | UDC numbers with English labels (for Merge Data in Orange) |
-| [geodata.csv](../_static/files/data/geodata.csv) | Geographical data for geocoding workflows |
-| [stopwords-lv.txt](../_static/files/data/stopwords-lv.txt) | Latvian stopwords for text mining |
-| [geomap.html](../_static/files/data/geomap.html) | Exported geo map (reference) |
+| <a href="_static/files/data/metadata_bssdh.csv">metadata_bssdh.csv</a> | Main workshop dataset (cleaned bibliographic metadata) |
+| <a href="_static/files/data/record_id_udc_number_udc_label_en.csv">record_id_udc_number_udc_label_en.csv</a> | UDC numbers with English labels (for Merge Data in Orange) |
+| <a href="_static/files/data/geodata.csv">geodata.csv</a> | Geographical data for geocoding workflows |
+| <a href="_static/files/data/stopwords-lv.txt">stopwords-lv.txt</a> | Latvian stopwords for text mining |
+| <a href="_static/files/data/geomap.html">geomap.html</a> | Exported geo map (reference) |
 
 ## Orange workflows (.ows)
 
@@ -18,20 +18,20 @@ Open these files in Orange (File -> Open) after downloading.
 
 | Workflow | File |
 |----------|------|
-| 1 — Language landscape | [1 language landscape.ows](../_static/files/orange/1%20language%20landscape.ows) |
-| 2 — UDC labels | [2 udc_labels.ows](../_static/files/orange/2%20udc_labels.ows) |
-| 3 — Authors | [3 authors.ows](../_static/files/orange/3%20authors.ows) |
-| 4 — Geodata | [4 geodata.ows](../_static/files/orange/4%20geodata.ows) |
-| 5 — Corpus (Latvian titles) | [5 corpus linguistic tools on latvian titles.ows](../_static/files/orange/5%20corpus%20linguistic%20tools%20on%20latvian%20titles.ows) |
-| 6 — Image classification | [6 Images classification.ows](../_static/files/orange/6%20Images%20classification.ows) |
+| 1 — Language landscape | <a href="_static/files/orange/1-language-landscape.ows">1-language-landscape.ows</a> |
+| 2 — UDC labels | <a href="_static/files/orange/2-udc-labels.ows">2-udc-labels.ows</a> |
+| 3 — Authors | <a href="_static/files/orange/3-authors.ows">3-authors.ows</a> |
+| 4 — Geodata | <a href="_static/files/orange/4-geodata.ows">4-geodata.ows</a> |
+| 5 — Corpus (Latvian titles) | <a href="_static/files/orange/5-corpus-linguistic-tools-on-latvian-titles.ows">5-corpus-linguistic-tools-on-latvian-titles.ows</a> |
+| 6 — Image classification | <a href="_static/files/orange/6-images-classification.ows">6-images-classification.ows</a> |
 
 ## Workflow diagrams (.svg)
 
 These images are also embedded in the [Orange workshop guide](workshops/orange.md).
 
-- [1 language landscape.svg](../_static/images/1-language-landscape.svg)
-- [2 udc_labels.svg](../_static/images/2-udc-labels.svg)
-- [3 authors 3.svg](../_static/images/3-authors-3.svg)
-- [4 geodata.svg](../_static/images/4-geodata.svg)
-- [5 corpus linguistic tools on latvian titles.svg](../_static/images/5-corpus-linguistic-tools-on-latvian-titles.svg)
-- [6 Images classification.svg](../_static/images/6-images-classification.svg)
+- <a href="_static/images/1-language-landscape.svg">1 language landscape.svg</a>
+- <a href="_static/images/2-udc-labels.svg">2 udc_labels.svg</a>
+- <a href="_static/images/3-authors-3.svg">3 authors 3.svg</a>
+- <a href="_static/images/4-geodata.svg">4 geodata.svg</a>
+- <a href="_static/images/5-corpus-linguistic-tools-on-latvian-titles.svg">5 corpus linguistic tools on latvian titles.svg</a>
+- <a href="_static/images/6-images-classification.svg">6 Images classification.svg</a>
