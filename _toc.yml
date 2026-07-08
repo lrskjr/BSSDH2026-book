@@ -1,0 +1,8 @@
+format: jb-book
+root: intro
+chapters:
+  - file: workshops/openrefine
+  - file: workshops/orange
+  - file: downloads
+  - file: instructor/openrefine-sequence
+  - file: instructor/orange-sequence
