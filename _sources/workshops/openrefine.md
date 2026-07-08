@@ -1,7 +1,5 @@
 # Data cleaning with OpenRefine
 
-![screenshot](../_static/images/openrefine-logo.svg)
-
 ## Increasing memory allocation
 https://openrefine.org/docs/manual/installing#increasing-memory-allocation
 
