@@ -34,9 +34,22 @@ jobs:
       - name: Build Jupyter Book
         run: jupyter-book build . --all
 
+      - name: Remove large zip from Pages output
+        run: rm -f ./_build/html/_static/files/data/daells-warehouse-categories.zip
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_build/html
           publish_branch: gh-pages
+
+      - name: Upload image dataset to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: workshop-data
+          name: Workshop data — image dataset
+          body: Large files for BSSDH2026 workshops (not deployed via GitHub Pages).
+          files: _static/files/data/daells-warehouse-categories.zip
+          overwrite_files: true
+          make_latest: false

@@ -7,6 +7,9 @@ BOOK = Path(__file__).resolve().parents[1]
 VAULT = Path(r'C:\Users\lakj\Documents\vault_1\BSSDH')
 DATA = Path(r'C:\Users\lakj\Documents\GitHub\BSSDH2026\data\Makslu kritika\bssdh openrefine and orange final')
 
+# URL for large image zip (hosted via GitHub Release, not gh-pages)
+RELEASE_ZIP_URL = 'https://github.com/lrskjr/BSSDH2026-book/releases/download/workshop-data/daells-warehouse-categories.zip'
+
 DOC_MAP = {
     'OpenRefine_en': 'openrefine.md',
     'Orange_en': 'orange.md',
@@ -226,7 +229,7 @@ def write_downloads() -> None:
         '',
         '| File | Description |',
         '|------|-------------|',
-        f'| {dl_link("_static/files/data/daells-warehouse-categories.zip", "daells-warehouse-categories.zip", download=True)} | Image folder for workflow 6 — Image classification (~184 MB) |',
+        f'| <a href="{RELEASE_ZIP_URL}" download="daells-warehouse-categories.zip">daells-warehouse-categories.zip</a> | Image folder for workflow 6 — Image classification (~184 MB) |',
         '',
         '## Orange workflows (.ows)',
         '',

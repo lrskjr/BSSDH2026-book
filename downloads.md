@@ -19,7 +19,7 @@ Unzip after download and import the folder in Orange with **Import Images**.
 
 | File | Description |
 |------|-------------|
-| <a href="_static/files/data/daells-warehouse-categories.zip" download="daells-warehouse-categories.zip">daells-warehouse-categories.zip</a> | Image folder for workflow 6 — Image classification (~184 MB) |
+| <a href="https://github.com/lrskjr/BSSDH2026-book/releases/download/workshop-data/daells-warehouse-categories.zip" download="daells-warehouse-categories.zip">daells-warehouse-categories.zip</a> | Image folder for workflow 6 — Image classification (~184 MB) |
 
 ## Orange workflows (.ows)
 
