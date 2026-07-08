@@ -29,9 +29,9 @@ Open these files in Orange (File -> Open) after downloading.
 
 These images are also embedded in the [Orange workshop guide](workshops/orange.md).
 
-- [1 language landscape.svg](../_static/images/1%20language%20landscape.svg)
-- [2 udc_labels.svg](../_static/images/2%20udc_labels.svg)
-- [3 authors 3.svg](../_static/images/3%20authors%203.svg)
-- [4 geodata.svg](../_static/images/4%20geodata.svg)
-- [5 corpus linguistic tools on latvian titles.svg](../_static/images/5%20corpus%20linguistic%20tools%20on%20latvian%20titles.svg)
-- [6 Images classification.svg](../_static/images/6%20Images%20classification.svg)
+- [1 language landscape.svg](../_static/images/1-language-landscape.svg)
+- [2 udc_labels.svg](../_static/images/2-udc-labels.svg)
+- [3 authors 3.svg](../_static/images/3-authors-3.svg)
+- [4 geodata.svg](../_static/images/4-geodata.svg)
+- [5 corpus linguistic tools on latvian titles.svg](../_static/images/5-corpus-linguistic-tools-on-latvian-titles.svg)
+- [6 Images classification.svg](../_static/images/6-images-classification.svg)

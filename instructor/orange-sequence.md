@@ -1,4 +1,4 @@
-﻿# Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining
+# Sequence plan — Workshop 2: Analysis and Visualization with Orange Data Mining
 
 *BSSDH2026. Student material: [Orange](../workshops/orange.md). Duration: 2 × 90 min (no break).*
 
@@ -57,12 +57,12 @@
 - CSV File Import: load cleaned metadata from the OpenRefine workshop
 - Group by: count records by language (set aggregation correctly)
 - Data Table + Bar Plot: show language distribution
-- Show the workflow image: ![1 language landscape.svg](../_static/images/1 language landscape.svg)
+- Show the workflow image: ![screenshot](../_static/images/1-language-landscape.svg)
 
 ### Task (10 min)
 
 - Participants build the workflow step-by-step
-- Goal: Bar Plot matching the reference image ![Pasted image 20260708191601.png](../_static/images/Pasted image 20260708191601.png)
+- Goal: Bar Plot matching the reference image ![screenshot](../_static/images/pasted-image-20260708191601.png)
 - Instructor circulates; typical mistakes: wrong column in Group by
 
 ---
@@ -74,7 +74,7 @@
 ### Demo (8 min)
 
 - Merge Data: join metadata with UDC labels via a shared control-number column
-- Show workflow: ![2 udc_labels.svg](../_static/images/2 udc_labels.svg)
+- Show workflow: ![screenshot](../_static/images/2-udc-labels.svg)
 - Brief intro to Column Statistics, Distributions, and Box Plot
 
 ### Task (12 min)
@@ -94,7 +94,7 @@
 - Select Rows: filter *author role* = *aut*
 - Edit Domain: set *author* to categorical (not string)
 - Explain nominal categorical data — count, do not compute with names
-- Show workflow: ![3 authors 3.svg](../_static/images/3 authors 3.svg)
+- Show workflow: ![screenshot](../_static/images/3-authors-3.svg)
 
 ### Task (20 min)
 
@@ -139,12 +139,12 @@
 ### Demo (10 min)
 
 - Geocoding -> Geo Map / Choropleth Map
-- Show workflow: ![4 geodata.svg](../_static/images/4 geodata.svg)
+- Show workflow: ![screenshot](../_static/images/4-geodata.svg)
 
 ### Task (10 min)
 
 - Participants build the geodata workflow
-- Goal: map like ![Geodata from Metadata in Choropleth Map.svg](../_static/images/Geodata from Metadata in Choropleth Map.svg)
+- Goal: map like ![screenshot](../_static/images/geodata-from-metadata-in-choropleth-map.svg)
 - Instructor: help with choice of geographic column and map type
 
 ---
@@ -158,7 +158,7 @@
 - Merge metadata + UDC labels (reuse from part A)
 - Select Rows: choose a UDC label, language code *lav*, author not empty
 - Corpus widget: choose *titles* and *sub_titles*
-- Show workflow: ![5 corpus linguistic tools on latvian titles.svg](../_static/images/5 corpus linguistic tools on latvian titles.svg)
+- Show workflow: ![screenshot](../_static/images/5-corpus-linguistic-tools-on-latvian-titles.svg)
 - Brief intro to text mining widgets (Word Cloud, Bag of Words, etc.)
 
 ### Task (20 min)
@@ -177,7 +177,7 @@
 
 - Import Images: folder *daells warehouse categories*
 - Hierarchical Clustering -> Image Viewer
-- Show workflow: ![6 Images classification.svg](../_static/images/6 Images classification.svg)
+- Show workflow: ![screenshot](../_static/images/6-images-classification.svg)
 - Explain: a different dataset from metadata — same Orange principles
 
 ### Task (10 min)

@@ -38,6 +38,18 @@ SECTION_SLUGS = {
     'And now to something different — Image classification': 'and-now-to-something-different-image-classification',
 }
 
+# original filename -> URL-safe filename (filled by copy_assets)
+IMAGE_MAP: dict[str, str] = {}
+
+
+def slugify_filename(name: str) -> str:
+    path = Path(name)
+    stem = path.stem.lower()
+    stem = stem.replace('—', '-').replace('–', '-')
+    stem = re.sub(r'[^a-z0-9]+', '-', stem)
+    stem = re.sub(r'-+', '-', stem).strip('-')
+    return f'{stem}{path.suffix.lower()}'
+
 
 def slugify_heading(text: str) -> str:
     if text in SECTION_SLUGS:
@@ -47,6 +59,12 @@ def slugify_heading(text: str) -> str:
     s = re.sub(r'[^a-z0-9\s-]', '', s)
     s = re.sub(r'\s+', '-', s)
     return s.strip('-')
+
+
+def resolve_image_name(name: str) -> str:
+    if name.startswith('assets/'):
+        name = name[len('assets/'):]
+    return IMAGE_MAP.get(name, slugify_filename(name))
 
 
 def convert_wikilink(match: re.Match, prefix: str) -> str:
@@ -73,15 +91,25 @@ def convert_wikilink(match: re.Match, prefix: str) -> str:
 
 
 def convert_images(text: str, image_prefix: str) -> str:
-    def repl(m: re.Match) -> str:
-        path = m.group(1)
-        if path.startswith('assets/'):
-            path = path[len('assets/'):]
-        return f'![{path}]({image_prefix}{path})'
-    return re.sub(r'!\[\[([^\]]+)\]\]', repl, text)
+    def repl_wiki(m: re.Match) -> str:
+        safe = resolve_image_name(m.group(1))
+        return f'![screenshot]({image_prefix}{safe})'
+
+    text = re.sub(r'!\[\[([^\]]+)\]\]', repl_wiki, text)
+
+    # fix already-converted markdown images that still use spaces in paths
+    def repl_md(m: re.Match) -> str:
+        alt, path = m.group(1), m.group(2)
+        filename = Path(path).name
+        safe = IMAGE_MAP.get(filename, slugify_filename(filename))
+        prefix = path[: -len(filename)] if path.endswith(filename) else image_prefix
+        return f'![{alt}]({prefix}{safe})'
+
+    return re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', repl_md, text)
 
 
 def convert_content(text: str, link_prefix: str, image_prefix: str) -> str:
+    text = text.lstrip('\ufeff')
     text = convert_images(text, image_prefix)
     text = re.sub(
         r'\[\[([^\]]+)\]\]',
@@ -106,9 +134,17 @@ def setup_dirs() -> None:
 def copy_assets() -> None:
     src_assets = VAULT / 'assets'
     dst = BOOK / '_static' / 'images'
+    IMAGE_MAP.clear()
+
+    for old in dst.iterdir():
+        if old.is_file():
+            old.unlink()
+
     for f in src_assets.iterdir():
         if f.is_file():
-            shutil.copy2(f, dst / f.name)
+            safe_name = slugify_filename(f.name)
+            IMAGE_MAP[f.name] = safe_name
+            shutil.copy2(f, dst / safe_name)
 
 
 def copy_data_files() -> None:
@@ -129,13 +165,69 @@ def copy_data_files() -> None:
         shutil.copy2(f, orange_dst / f.name)
 
 
-def write_converted(src_name: str, dst_rel: str, link_prefix: str, image_prefix: str, title: str | None = None) -> None:
+def write_converted(
+    src_name: str,
+    dst_rel: str,
+    link_prefix: str,
+    image_prefix: str,
+    title: str | None = None,
+) -> None:
     src = VAULT / src_name
-    text = src.read_text(encoding='utf-8')
+    text = src.read_text(encoding='utf-8-sig')
     text = convert_content(text, link_prefix, image_prefix)
     if title:
         text = f'# {title}\n\n' + text
     (BOOK / dst_rel).write_text(text, encoding='utf-8', newline='\n')
+
+
+def write_downloads() -> None:
+    lines = [
+        '# Downloads',
+        '',
+        'All workshop files are available for direct download below.',
+        '',
+        '## Data files',
+        '',
+        '| File | Description |',
+        '|------|-------------|',
+        '| [metadata_bssdh.csv](../_static/files/data/metadata_bssdh.csv) | Main workshop dataset (cleaned bibliographic metadata) |',
+        '| [record_id_udc_number_udc_label_en.csv](../_static/files/data/record_id_udc_number_udc_label_en.csv) | UDC numbers with English labels (for Merge Data in Orange) |',
+        '| [geodata.csv](../_static/files/data/geodata.csv) | Geographical data for geocoding workflows |',
+        '| [stopwords-lv.txt](../_static/files/data/stopwords-lv.txt) | Latvian stopwords for text mining |',
+        '| [geomap.html](../_static/files/data/geomap.html) | Exported geo map (reference) |',
+        '',
+        '## Orange workflows (.ows)',
+        '',
+        'Open these files in Orange (File -> Open) after downloading.',
+        '',
+        '| Workflow | File |',
+        '|----------|------|',
+        '| 1 — Language landscape | [1 language landscape.ows](../_static/files/orange/1%20language%20landscape.ows) |',
+        '| 2 — UDC labels | [2 udc_labels.ows](../_static/files/orange/2%20udc_labels.ows) |',
+        '| 3 — Authors | [3 authors.ows](../_static/files/orange/3%20authors.ows) |',
+        '| 4 — Geodata | [4 geodata.ows](../_static/files/orange/4%20geodata.ows) |',
+        '| 5 — Corpus (Latvian titles) | [5 corpus linguistic tools on latvian titles.ows](../_static/files/orange/5%20corpus%20linguistic%20tools%20on%20latvian%20titles.ows) |',
+        '| 6 — Image classification | [6 Images classification.ows](../_static/files/orange/6%20Images%20classification.ows) |',
+        '',
+        '## Workflow diagrams (.svg)',
+        '',
+        'These images are also embedded in the [Orange workshop guide](workshops/orange.md).',
+        '',
+    ]
+
+    svg_keys = [
+        '1 language landscape.svg',
+        '2 udc_labels.svg',
+        '3 authors 3.svg',
+        '4 geodata.svg',
+        '5 corpus linguistic tools on latvian titles.svg',
+        '6 Images classification.svg',
+    ]
+    for key in svg_keys:
+        safe = IMAGE_MAP.get(key, slugify_filename(key))
+        lines.append(f'- [{key}](../_static/images/{safe})')
+
+    (BOOK / 'downloads.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
 
 
 def main() -> None:
@@ -169,7 +261,9 @@ def main() -> None:
         link_prefix='../workshops/',
         image_prefix='../_static/images/',
     )
+    write_downloads()
     print('Conversion complete.')
+    print(f'Images renamed: {len(IMAGE_MAP)}')
 
 
 if __name__ == '__main__':
