@@ -165,6 +165,12 @@ def copy_data_files() -> None:
         shutil.copy2(f, orange_dst / f.name)
 
 
+def strip_openrefine_logo(text: str) -> str:
+    text = re.sub(r'^!\[\[assets/openrefine_logo\.svg\]\]\s*\n+', '', text)
+    text = re.sub(r'^!\[[^\]]*\]\([^)]*openrefine-logo\.svg\)\s*\n+', '', text, count=1)
+    return text
+
+
 def write_converted(
     src_name: str,
     dst_rel: str,
@@ -174,6 +180,8 @@ def write_converted(
 ) -> None:
     src = VAULT / src_name
     text = src.read_text(encoding='utf-8-sig')
+    if src_name == 'OpenRefine_en.md':
+        text = strip_openrefine_logo(text)
     text = convert_content(text, link_prefix, image_prefix)
     if title:
         text = f'# {title}\n\n' + text

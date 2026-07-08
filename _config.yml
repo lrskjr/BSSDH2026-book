@@ -2,7 +2,6 @@
 title: BSSDH 2026 Workshop Materials
 author: Lars Kjær
 copyright: "2026"
-logo: _static/images/openrefine-logo.svg
 
 repository:
   url: https://github.com/lrskjr/BSSDH2026-book
@@ -15,7 +14,6 @@ html:
   use_edit_page_button: true
   home_page_in_navbar: false
   baseurl: /BSSDH2026-book
-  favicon: _static/images/openrefine-logo.svg
   announcement: "BSSDH 2026 — OpenRefine and Orange workshop materials"
 
 launch_buttons:
