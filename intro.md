@@ -24,8 +24,22 @@ Install Orange add-ons **Geo**, **Image Analytics**, and **Text** before the Ora
 
 ## Dataset
 
-The workshop uses a cleaned subset of bibliographic metadata. The main file is `metadata_bssdh.csv` (~57,900 records). Supporting files include UDC labels, geodata, and Latvian stopwords for text mining.
+The workshop uses a cleaned subset of bibliographic metadata from the dataset *Mākslu kritikas datu kopa*
+
+It is a DH-friendly metadata corpus documenting Latvian art criticism from 2015 to 2025 in newspapers, journals, and online portals.
+
+The records include reviews of theatre performances, books, exhibitions, concerts, films, and related cultural coverage.
+
+The main file is `metadata_bssdh.csv` (~57,900 records). Supporting files include UDC labels, geodata, and Latvian stopwords for text mining.
 
 ## Acknowledgements
 
-These materials were prepared by Lars Kjær. [Cursor](https://cursor.com) was used as an AI-assisted editor for English translation, proofreading, and building this Jupyter Book site. All content was reviewed by the author.
+These materials were prepared by Lars Kjær, [The Royal Danish Library](https://www.kb.dk/en).
+
+The original Mākslu kritikas dataset has been compiled by Anda Baklāne, [The National Library of Latvia](https://lnb.gov.lv/en/).
+
+The Latvian stopword list originates from [Stopwords ISO](https://github.com/stopwords-iso).
+
+AI software has been used as editor for English translation, proofreading, and for building this Jupyter Book site.
+
+All content was reviewed by Lars Kjær.
